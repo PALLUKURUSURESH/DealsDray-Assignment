@@ -1,0 +1,58 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build output
+build/
+dist/
+public/
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Environment files
+.env
+.env.*.local
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Test coverage
+coverage/
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# Misc
+*.tgz
+*.gz
+*.zip
+*.tar
+*.rar
+
+# SASS/SCSS cache
+.sass-cache/
+*.scssc
