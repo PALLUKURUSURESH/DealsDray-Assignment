@@ -1,11 +1,17 @@
-/* General reset to remove default margins and paddings */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: linear-gradient(black,yello,45deg);
+}
+.register-container{
+  background-color: #fff;
+border-radius: 5px;
+padding: 10px;
+box-shadow: 10px 20px 40px black;
 }
 
-/* Body styling for consistent layout */
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;

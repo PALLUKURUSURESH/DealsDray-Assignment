@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import './index.css'; // Ensure this file is created for styling
+import './index.css';
 
 const Home = () => {
   const [name, setName] = useState('');
@@ -13,6 +12,7 @@ const Home = () => {
   const [courses, setCourses] = useState([]);
   const [photo, setPhoto] = useState(null);
   const [message, setMessage] = useState('');
+  const [employees, setEmployees] = useState([]); // State to store employee list
   const navigate = useNavigate();
 
   const handleCourseChange = (e) => {
@@ -46,11 +46,19 @@ const Home = () => {
         },
       });
       setMessage('Employee created successfully!');
+      setName('');
+      setEmail('');
+      setMobileNo('');
+      setDesignation('');
+      setGender('');
+      setCourses([]);
     } catch (error) {
       console.error('Error creating employee:', error);
       setMessage('Error creating employee');
     }
   };
+
+  
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -59,16 +67,13 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <header className="header">
-        <h1>Employee Management</h1>
-        <nav>
-          <a href="/home">Home</a>
-          <a href="/employees">Employee List</a>
-          <span className="username">{localStorage.getItem('username')}</span>
-          <button onClick={handleLogout} className="logout-button">Logout</button>
-        </nav>
-      </header>
-      <div className="form-container">
+      <nav className="menu-bar">
+        <Link to='/'>Home</Link>
+        <Link to='/employee-list'>Employee List</Link>
+        <h3>Profile: <span className="username">{localStorage.getItem('user')}</span></h3>
+        <button onClick={handleLogout} className="logout-button">Logout</button>
+      </nav>
+
         <h2>Create Employee</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -111,13 +116,13 @@ const Home = () => {
             >
               <option value="">Select</option>
               <option value="HR">HR</option>
-              <option value="Managers">Managers</option>
+              <option value="Manager">Manager</option>
               <option value="Sales">Sales</option>
             </select>
           </div>
           <div className="form-group">
             <label>Gender:</label>
-            <label>
+            <div className="radio-group">
               <input
                 type="radio"
                 name="gender"
@@ -126,8 +131,6 @@ const Home = () => {
                 onChange={(e) => setGender(e.target.value)}
               />
               Male
-            </label>
-            <label>
               <input
                 type="radio"
                 name="gender"
@@ -136,11 +139,11 @@ const Home = () => {
                 onChange={(e) => setGender(e.target.value)}
               />
               Female
-            </label>
+            </div>
           </div>
           <div className="form-group">
             <label>Courses:</label>
-            <label>
+            <div className="checkbox-group">
               <input
                 type="checkbox"
                 value="MCA"
@@ -148,8 +151,6 @@ const Home = () => {
                 onChange={handleCourseChange}
               />
               MCA
-            </label>
-            <label>
               <input
                 type="checkbox"
                 value="BCA"
@@ -157,16 +158,14 @@ const Home = () => {
                 onChange={handleCourseChange}
               />
               BCA
-            </label>
-            <label>
               <input
                 type="checkbox"
-                value="BSE"
-                checked={courses.includes('BSE')}
+                value="BSC"
+                checked={courses.includes('BSC')}
                 onChange={handleCourseChange}
               />
-              BSE
-            </label>
+              BSC
+            </div>
           </div>
           <div className="form-group">
             <label htmlFor="photo">Upload Photo:</label>
@@ -181,8 +180,9 @@ const Home = () => {
         </form>
         {message && <p className="message">{message}</p>}
       </div>
-    </div>
-  );
-};
+
+  )
+}
+
 
 export default Home;

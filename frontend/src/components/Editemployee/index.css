@@ -1,0 +1,96 @@
+/* index.css */
+
+/* Container styling */
+.edit-employee-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 100%;
+  
+  }
+
+  .navigation-container{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-decoration: none;
+  }
+  .para{
+    font-size: 20px;
+    color: #170101;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: aqua;
+    padding: 10px 15px;
+    border-radius: 5px;
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  /* Form styling */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 5px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .radio-group,
+  .checkbox-group {
+    display: flex;
+  }
+  
+  
+  .submit-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .message {
+    margin-top: 20px;
+    color: #ff0000;
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .edit-employee-container {
+      padding: 10px;
+    }
+  
+    .form-group {
+      margin-bottom: 10px;
+    }
+  
+    .submit-button {
+      padding: 8px 12px;
+    }
+  }
+  

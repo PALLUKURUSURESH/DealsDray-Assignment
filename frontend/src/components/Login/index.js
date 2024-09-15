@@ -43,6 +43,7 @@ const Login = () => {
     
                 // On successful login, store the JWT token in local storage
                 localStorage.setItem('token', response.data.token);
+                localStorage.setItem('user',username)
     
                 // Redirect to the home page
                 navigate('/');

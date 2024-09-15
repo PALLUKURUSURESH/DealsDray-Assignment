@@ -1,6 +1,10 @@
-body{
-  height: 100vh;
+*{
+  box-sizing: border-box;
+  text-decoration: none;
+}body{
   width: 100vw;
+  background: rgb(8,0,0);
+background: linear-gradient(45deg, rgba(8,0,0,1) 0%, rgba(224,212,25,1) 50%, rgba(224,212,25,1) 100%);
 }
 .app-container{
   width: 100vw;
@@ -8,8 +12,9 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  
+ 
 }
+
 .img-logo{
   height: 100px;
   width: 100px;

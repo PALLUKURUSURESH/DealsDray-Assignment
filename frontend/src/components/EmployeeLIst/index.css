@@ -1,0 +1,170 @@
+/* General styles */
+.employee-list-container {
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.header-container{
+height: 100px;
+width: 100%;
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+line-height: 50px;
+}
+.btn-create{
+  height: 50px;
+  width: 200px;
+  background-color: #4CAF50;
+  color: aliceblue;
+  margin: 15px 10px;
+}
+/* Search input */
+.search-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  height: 50px;
+  width: 360px;
+  outline: none;
+}
+
+/* Responsive table */
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.employee-table th {
+  background-color: #f2f2f2;
+}
+
+/* Action buttons */
+.edit-button,
+.delete-button {
+  padding: 8px 12px;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.edit-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.delete-button {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button:hover {
+  background-color: #e03e3e;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .employee-list-container {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .employee-table {
+    font-size: 14px;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    padding: 8px;
+  }
+
+  .search-input {
+    max-width: 100%;
+  }
+
+  .edit-button,
+  .delete-button {
+    padding: 6px 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .employee-list-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .employee-table {
+    font-size: 12px;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    padding: 6px;
+  }
+
+  /* Stack table rows for small screens */
+  .employee-table, 
+  .employee-table thead, 
+  .employee-table tbody, 
+  .employee-table th, 
+  .employee-table td, 
+  .employee-table tr {
+    display: block;
+  }
+
+  .employee-table tr {
+    margin-bottom: 15px;
+  }
+
+  .employee-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .employee-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: calc(50% - 20px);
+    white-space: nowrap;
+    text-align: left;
+  }
+
+  .edit-button,
+  .delete-button {
+    padding: 5px 8px;
+    margin-right: 5px;
+  }
+}

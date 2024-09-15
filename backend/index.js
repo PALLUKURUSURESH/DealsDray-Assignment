@@ -5,12 +5,12 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
-const Employee = require('./models/Employee'); // Ensure the correct path
-const EmployeeList = require('./models/EmployeeList'); // Ensure the correct path
+const Employee = require('./models/Employee');
+const EmployeeList = require('./models/EmployeeList');
 
 const app = express();
 
-// Enable CORS for all requests
+// Enable CORS
 app.use(cors());
 
 // Middleware to parse JSON
@@ -25,47 +25,25 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
-
 const upload = multer({ storage });
 
 // Registration Route
 app.post('/register', async (req, res) => {
   const { username, email, password } = req.body;
-
-  // Basic validation
   if (!username || !email || !password) {
     return res.status(400).json({ message: 'All fields are required.' });
   }
-
   try {
-    // Check if user already exists
     const existingUser = await Employee.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'User already exists.' });
     }
-
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new user
-    const newEmployee = new Employee({
-      username,
-      email,
-      password: hashedPassword,
-    });
-
+    const newEmployee = new Employee({ username, email, password: hashedPassword });
     await newEmployee.save();
-
-    // Generate JWT token
     const token = jwt.sign({ userId: newEmployee._id }, 'your_jwt_secret', { expiresIn: '1h' });
-
-    res.status(201).json({
-      message: 'User registered successfully!',
-      token,
-    });
-
+    res.status(201).json({ message: 'User registered successfully!', token });
   } catch (error) {
-    console.error('Error during registration:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
@@ -73,34 +51,21 @@ app.post('/register', async (req, res) => {
 // Login Route
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-
-  // Basic validation
   if (!username || !password) {
     return res.status(400).json({ message: 'All fields are required.' });
   }
-
   try {
-    // Find user by username
     const user = await Employee.findOne({ username });
     if (!user) {
       return res.status(400).json({ message: 'Invalid username or password.' });
     }
-
-    // Compare the password with the hashed password stored in the database
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid username or password.' });
     }
-
-    // Generate JWT token
     const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
-
-    res.status(200).json({
-      message: 'Login successful!',
-      token,
-    });
+    res.status(200).json({ message: 'Login successful!', token });
   } catch (error) {
-    console.error('Error during login:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
@@ -109,14 +74,10 @@ app.post('/login', async (req, res) => {
 app.post('/create-employee', upload.single('photo'), async (req, res) => {
   const { name, email, mobileNo, designation, gender, courses } = req.body;
   const photo = req.file ? req.file.filename : null;
-
-  // Basic validation
   if (!name || !email || !mobileNo || !designation || !gender) {
     return res.status(400).json({ message: 'All fields are required.' });
   }
-
   try {
-    // Create new employee
     const newEmployee = new EmployeeList({
       name,
       email,
@@ -126,15 +87,84 @@ app.post('/create-employee', upload.single('photo'), async (req, res) => {
       courses: JSON.parse(courses),
       photo,
     });
-
     await newEmployee.save();
-
-    res.status(201).json({
-      message: 'Employee created successfully!',
-    });
-
+    res.status(201).json({ message: 'Employee created successfully!' });
   } catch (error) {
-    console.error('Error during employee creation:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Get All Employees Route
+app.get('/get-employees', async (req, res) => {
+  try {
+    const employees = await EmployeeList.find();
+    res.status(200).json(employees);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching employees', error });
+  }
+});
+
+// Get Single Employee by ID Route
+app.get('/get-employee/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const employee = await EmployeeList.findById(id);
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+    res.status(200).json(employee);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching employee', error });
+  }
+});
+
+// Delete Employee Route
+app.delete('/delete-employee/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const employee = await EmployeeList.findByIdAndDelete(id);
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+    res.status(200).json({ message: 'Employee deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting employee', error });
+  }
+});
+
+
+// Update Employee Route
+app.put('/update-employee/:id', upload.single('photo'), async (req, res) => {
+  const { id } = req.params;
+  const { name, email, mobileNo, designation, gender, courses } = req.body;
+  const photo = req.file ? req.file.filename : null;
+
+  if (!name || !email || !mobileNo || !designation || !gender) {
+    return res.status(400).json({ message: 'All fields are required.' });
+  }
+
+  try {
+    const updatedEmployee = await EmployeeList.findByIdAndUpdate(
+      id,
+      {
+        name,
+        email,
+        mobileNo,
+        designation,
+        gender,
+        courses: JSON.parse(courses),
+        photo: photo ? photo : undefined,
+      },
+      { new: true }
+    );
+
+    if (!updatedEmployee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    res.status(200).json({ message: 'Employee updated successfully!', employee: updatedEmployee });
+  } catch (error) {
+    console.error('Error updating employee:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
@@ -146,7 +176,6 @@ mongoose.connect('mongodb+srv://pallukurusuresh04:P%40suresh123@backenddb.vsuzr.
 })
   .then(() => {
     console.log('Database connected');
-    // Start the server only if DB connection is successful
     app.listen(5000, () => {
       console.log('Server running at http://localhost:5000');
     });

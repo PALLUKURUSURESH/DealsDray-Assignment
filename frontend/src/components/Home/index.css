@@ -1,159 +1,143 @@
-/* src/components/Home.css */
+
+
 .home-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   
-  .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  
-  .header h1 {
-    margin: 0;
-  }
-  
-  .header nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  .header nav a {
-    color: white;
-    margin: 5px 0;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .header nav .username {
-    margin: 10px 0;
-  }
-  
-  .logout-button {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .form-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #f4f4f4;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-container h2 {
-    margin-bottom: 20px;
-  }
-  
-  .form-container .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-container .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-container .form-group input,
-  .form-container .form-group select {
-    width: 100%;
+}
+
+.menu-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background:rgb(21, 18, 18);
+  color: #f1f1f1;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  height: 80px;
+  width: 80%;
+  padding: 20px;
+  opacity: 0.8;
+}
+
+.menu-bar a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.menu-bar .username {
+  margin-right: auto;
+}
+
+.logout-button , .btn-list {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.logout-button:hover {
+  background-color: #e03e3e;
+}
+
+.form-container {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h2 {
+  margin-top: 0;
+  -webkit-text-stroke: 1px red;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.radio-group,
+.checkbox-group {
+  display: flex;
+  flex-direction: row;
+
+}
+
+
+.submit-button{
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.message {
+  margin-top: 15px;
+  color: #d9534f;
+}
+
+@media (max-width: 480px) {
+  /* Adjust layout for mobile phones */
+  .home-container {
     padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ddd;
-    border-radius: 5px;
   }
-  
-  .form-container .form-group input[type="file"] {
-    padding: 0;
+
+  .menu-bar {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .form-container .form-group input[type="radio"],
-  .form-container .form-group input[type="checkbox"] {
-    margin-right: 5px;
+
+  .menu-bar a {
+    margin-bottom: 10px;
   }
-  
-  .submit-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
+
+  .logout-button {
+    width: 100%;
+    margin-top: 15px;
   }
-  
-  .message {
-    margin-top: 20px;
-    color: green;
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 12px;
   }
-  
-  /* Responsive styles */
-  @media (max-width: 768px) {
-    .header {
-      padding: 15px;
-    }
-  
-    .header nav {
-      flex-direction: column;
-    }
-  
-    .header nav a {
-      margin: 5px 0;
-    }
-  
-    .form-container {
-      padding: 15px;
-    }
-  
-    .form-container .form-group input,
-    .form-container .form-group select {
-      padding: 8px;
-    }
+
+  .form-container {
+    padding: 10px;
   }
-  
-  @media (max-width: 480px) {
-    .header h1 {
-      font-size: 20px;
-    }
-  
-    .header nav a {
-      font-size: 14px;
-    }
-  
-    .logout-button {
-      font-size: 14px;
-    }
-  
-    .form-container {
-      padding: 10px;
-    }
-  
-    .form-container .form-group input,
-    .form-container .form-group select {
-      font-size: 14px;
-      padding: 6px;
-    }
-  
-    .submit-button {
-      font-size: 14px;
-      padding: 8px 16px;
-    }
-  
-    .message {
-      font-size: 14px;
-    }
-  }
-  
+}
