@@ -1,12 +1,16 @@
+
 import React, { useState } from 'react';
+import { useNavigate,Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {Link} from 'react-router-dom'
+import axios from 'axios'; // Import Axios
 import './index.css';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({ username: '', password: '' });
+    const [message, setMessage] = useState(''); // To display server messages
+    const navigate = useNavigate(); // To handle navigation
 
     const validateForm = () => {
         let isValid = true;
@@ -25,14 +29,31 @@ const Login = () => {
         return isValid;
     };
 
-    const handleSubmit = (e) => {
+    
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+    
         if (validateForm()) {
-            console.log('Username:', username);
-            console.log('Password:', password);
-            // Handle form submission logic here
+            try {
+                const response = await axios.post('http://localhost:5000/login', {
+                    username,
+                    password,
+                });
+    
+                // On successful login, store the JWT token in local storage
+                localStorage.setItem('token', response.data.token);
+    
+                // Redirect to the home page
+                navigate('/');
+            } catch (error) {
+                // Log the full error response for debugging
+                console.error('Login error:', error);
+                setMessage(error.response?.data?.message || 'Server error');
+            }
         }
     };
+    
 
     return (
         <div className="login-container">
@@ -67,7 +88,8 @@ const Login = () => {
                         {errors.password && <p className="error">{errors.password}</p>}
                     </div>
                     <button type="submit">Login</button>
-                    <p>If you did'n have Account ?<Link to='/register'><span>Register</span></Link> </p>
+                    {message && <p className="error">{message}</p>} {/* Display login error */}
+                    <p>If you didn't have an account? <Link to='/register'><span>Register</span></Link> </p>
                 </form>
             </motion.div>
         </div>

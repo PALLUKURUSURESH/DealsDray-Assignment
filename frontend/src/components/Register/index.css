@@ -1,117 +1,109 @@
-
-.register-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 24px;
-    max-width: 100%;
-    margin: auto;
-    box-sizing: border-box;
-    border: 2px solid black;
-    border-radius: 4px;
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #333;
-    text-align: center;
-  }
-  h3{
-    text-decoration: none;
+/* General reset to remove default margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Body styling for consistent layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Container for the registration form */
+form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%; /* Ensures form adapts to smaller screens */
+}
+
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Form title */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Individual form fields */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+  width: 400px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Submit button styling */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+/* Message styling */
+p {
+  margin-top: 10px;
+  color: #333;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   form {
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    
+    padding: 15px;
   }
-  
 
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    box-sizing: border-box;
+  input, button {
+    font-size: 14px;
+    padding: 8px;
   }
-  
-
-  label {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 5px;
-  }
-  
-  
-  button {
-    padding: 12px;
-    background-color: #007bff; /* Primary color */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  button:hover {
-    background-color: #0056b3; /* Darker shade */
-  }
-  
-  span{
-    padding-left:10px;
 }
-  
-  p {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin: 5px 0;
+
+@media (max-width: 480px) {
+  form {
+    padding: 10px;
   }
-  
-  
-  @media (max-width: 768px) {
-    h2 {
-      font-size: 1.5rem;
-    }
-    
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      font-size: 0.875rem;
-    }
-  
-    button {
-      font-size: 0.875rem;
-    }
+
+  h2 {
+    font-size: 18px;
   }
-  
-  @media (max-width: 480px) {
-    div {
-      padding: 15px;
-    }
-  
-    h2 {
-      font-size: 1.25rem;
-    }
-  
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      padding: 10px;
-    }
-  
-    button {
-      padding: 10px;
-      font-size: 0.75rem;
-    }
+
+  input, button {
+    font-size: 12px;
+    padding: 6px;
   }
-  
+}

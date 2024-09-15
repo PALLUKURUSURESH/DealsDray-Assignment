@@ -1,0 +1,159 @@
+/* src/components/Home.css */
+.home-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    margin: 0;
+  }
+  
+  .header nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .header nav a {
+    color: white;
+    margin: 5px 0;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .header nav .username {
+    margin: 10px 0;
+  }
+  
+  .logout-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form-container .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-container .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-container .form-group input,
+  .form-container .form-group select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .form-container .form-group input[type="file"] {
+    padding: 0;
+  }
+  
+  .form-container .form-group input[type="radio"],
+  .form-container .form-group input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  .submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .message {
+    margin-top: 20px;
+    color: green;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .header {
+      padding: 15px;
+    }
+  
+    .header nav {
+      flex-direction: column;
+    }
+  
+    .header nav a {
+      margin: 5px 0;
+    }
+  
+    .form-container {
+      padding: 15px;
+    }
+  
+    .form-container .form-group input,
+    .form-container .form-group select {
+      padding: 8px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header h1 {
+      font-size: 20px;
+    }
+  
+    .header nav a {
+      font-size: 14px;
+    }
+  
+    .logout-button {
+      font-size: 14px;
+    }
+  
+    .form-container {
+      padding: 10px;
+    }
+  
+    .form-container .form-group input,
+    .form-container .form-group select {
+      font-size: 14px;
+      padding: 6px;
+    }
+  
+    .submit-button {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  
+    .message {
+      font-size: 14px;
+    }
+  }
+  
