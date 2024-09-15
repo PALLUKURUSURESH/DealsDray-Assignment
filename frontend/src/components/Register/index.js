@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom'
-import './index.css'; 
+import axios from 'axios'; // Import axios
+import { Link } from 'react-router-dom';
+import './index.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,8 @@ const Register = () => {
     confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
-  
+  const [message, setMessage] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -32,26 +34,39 @@ const Register = () => {
     return newErrors;
   };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     const validationErrors = validate();
-//     if (Object.keys(validationErrors).length > 0) {
-//       setErrors(validationErrors);
-//       return;
-//     }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setMessage('');
+      return;
+    }
 
-//     try {
-//       await axios.post('http://localhost:5000/api/auth/register', formData);
-//       alert('Registration successful');
-//     } catch (err) {
-//       setErrors({ submit: 'Registration failed' });
-//     }
-//   };
+    try {
+      const response = await axios.post('http://localhost:5000/register', formData);
+      setMessage('Registration successful! Please check your email to verify your account.');
+      setFormData({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      });
+      setErrors({});
+    } catch (err) {
+      if (err.response && err.response.data) {
+        setErrors({ submit: err.response.data.message || 'Registration failed' });
+      } else {
+        setErrors({ submit: 'Registration failed' });
+      }
+      setMessage('');
+    }
+  };
 
   return (
     <div className='register-container'>
       <h2>Register</h2>
-      <form onSubmit={handleChange}>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Username:</label>
           <input
@@ -60,7 +75,7 @@ const Register = () => {
             value={formData.username}
             onChange={handleChange}
           />
-          {errors.username && <p>{errors.username}</p>}
+          {errors.username && <p className="error-message">{errors.username}</p>}
         </div>
         <div>
           <label>Email:</label>
@@ -70,7 +85,7 @@ const Register = () => {
             value={formData.email}
             onChange={handleChange}
           />
-          {errors.email && <p>{errors.email}</p>}
+          {errors.email && <p className="error-message">{errors.email}</p>}
         </div>
         <div>
           <label>Password:</label>
@@ -80,7 +95,7 @@ const Register = () => {
             value={formData.password}
             onChange={handleChange}
           />
-          {errors.password && <p>{errors.password}</p>}
+          {errors.password && <p className="error-message">{errors.password}</p>}
         </div>
         <div>
           <label>Confirm Password:</label>
@@ -90,11 +105,12 @@ const Register = () => {
             value={formData.confirmPassword}
             onChange={handleChange}
           />
-          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+          {errors.confirmPassword && <p className="error-message">{errors.confirmPassword}</p>}
         </div>
-        {errors.submit && <p>{errors.submit}</p>}
+        {errors.submit && <p className="error-message">{errors.submit}</p>}
+        {message && <p className="success-message">{message}</p>}
         <button type="submit">Register</button>
-        <p>If you  have Account ...<Link to='/login'><span>Login</span></Link> </p>
+        <p>If you have an account ... <Link to='/login'><span>Login</span></Link></p>
       </form>
     </div>
   );
